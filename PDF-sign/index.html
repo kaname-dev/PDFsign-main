@@ -12,160 +12,97 @@
             box-sizing: border-box;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', sans-serif;
-            background: #121212;
-            min-height: 100vh;
-            padding: 10px;
-            color: #e0e0e0;
-        }
-
-        @media (min-width: 768px) {
-            body {
-                padding: 20px;
-            }
-        }
-
-        .container {
-            max-width: 1400px;
-            margin: 0 auto;
-            background: #1e1e1e;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        html, body {
+            height: 100%;
             overflow: hidden;
         }
 
-        @media (min-width: 768px) {
-            .container {
-                border-radius: 20px;
-                box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-            }
-        }
-
-        .header {
-            background: #2d2d2d;
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #121212;
             color: #e0e0e0;
-            padding: 10px 20px;
-            text-align: center;
         }
 
-        .header-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .header h1 {
-            font-size: 1.3em;
-            margin-bottom: 4px;
-            font-weight: 600;
+        .app {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
+            flex-direction: column;
+            height: 100vh;
+            height: 100dvh;
+            background: #121212;
         }
 
-        .header h1 .material-icons {
-            font-size: 1.1em;
-        }
-
-        .header p {
-            font-size: 0.85em;
-            opacity: 0.8;
-            margin: 0;
-        }
-
-        @media (min-width: 768px) {
-            .header {
-                padding: 15px 30px;
-            }
-
-            .header h1 {
-                font-size: 1.8em;
-                margin-bottom: 6px;
-            }
-
-            .header p {
-                font-size: 0.9em;
-            }
-        }
-
-        .controls {
-            padding: 15px;
-            background: #252525;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        .toolbar {
+            flex-shrink: 0;
             display: flex;
-            gap: 10px;
             flex-wrap: wrap;
             align-items: center;
+            gap: 6px;
+            padding: 6px 8px;
+            background: #1a1a1a;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            z-index: 50;
         }
 
-
-        @media (min-width: 768px) {
-            .controls {
-                padding: 25px;
-                gap: 15px;
-            }
-        }
-
-        .btn {
-            padding: 10px 12px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            cursor: pointer;
-            transition: all 0.2s;
-            font-weight: 500;
+        .toolbar-group {
             display: inline-flex;
             align-items: center;
             gap: 4px;
         }
 
-        .btn .material-icons {
+        .toolbar-spacer {
+            flex: 1;
+            min-width: 8px;
+        }
+
+        .btn,
+        .file-input-label {
+            padding: 6px 10px;
+            border: none;
+            border-radius: 6px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: background 0.15s;
+            font-weight: 500;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: #333;
+            color: #e0e0e0;
+            line-height: 1;
+            white-space: nowrap;
+        }
+
+        .btn:hover:not(:disabled),
+        .file-input-label:hover {
+            background: #444;
+        }
+
+        .btn:disabled {
+            opacity: 0.35;
+            cursor: not-allowed;
+        }
+
+        .btn .material-icons,
+        .file-input-label .material-icons {
             font-size: 18px;
         }
 
-        .btn span:not(.material-icons) {
+        .btn span:not(.material-icons),
+        .file-input-label span:not(.material-icons) {
             display: none;
-        }
-
-        .btn-primary {
-            background: #424242;
-            color: #e0e0e0;
-        }
-
-        .btn-primary:hover {
-            background: #4d4d4d;
         }
 
         .btn-download {
             background: #1976d2;
-            color: #ffffff;
-            margin-left: auto;
+            color: #fff;
         }
 
-        .btn-download:hover {
+        .btn-download:hover:not(:disabled) {
             background: #1565c0;
-        }
-
-        @media (min-width: 768px) {
-            .btn {
-                padding: 12px 24px;
-                font-size: 15px;
-                gap: 8px;
-            }
-
-            .btn .material-icons {
-                font-size: 20px;
-            }
-
-            .btn span:not(.material-icons) {
-                display: inline;
-            }
         }
 
         .file-input-wrapper {
             position: relative;
-            overflow: hidden;
             display: inline-block;
         }
 
@@ -174,109 +111,107 @@
             left: -9999px;
         }
 
-        .file-input-label {
-            display: inline-flex;
+        .zoom-controls {
+            display: none;
             align-items: center;
-            gap: 4px;
-            padding: 10px 12px;
-            background: #424242;
-            color: #e0e0e0;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: all 0.2s;
-            font-size: 14px;
+            gap: 2px;
+            padding: 2px;
+            background: #252525;
+            border-radius: 6px;
         }
 
-        .file-input-label .material-icons {
+        .zoom-controls:not(.hidden) {
+            display: inline-flex;
+        }
+
+        .zoom-btn {
+            width: 32px;
+            height: 32px;
+            background: transparent;
+            color: #e0e0e0;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.15s;
+            padding: 0;
+        }
+
+        .zoom-btn:hover {
+            background: #3a3a3a;
+        }
+
+        .zoom-btn .material-icons {
             font-size: 18px;
         }
 
-        .file-input-label span:not(.material-icons) {
+        .page-nav {
             display: none;
+            align-items: center;
+            gap: 2px;
         }
 
-        .file-input-label:hover {
-            background: #4d4d4d;
+        .page-nav.visible {
+            display: inline-flex;
         }
 
-        @media (min-width: 768px) {
-            .file-input-label {
-                padding: 12px 24px;
-                gap: 8px;
-                font-size: 15px;
-            }
+        .page-nav-info {
+            font-size: 12px;
+            color: #9e9e9e;
+            min-width: 56px;
+            text-align: center;
+            user-select: none;
+        }
 
-            .file-input-label .material-icons {
-                font-size: 20px;
-            }
+        .status {
+            font-size: 11px;
+            color: #888;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            order: 10;
+            flex-basis: 100%;
+            padding: 0 2px 2px;
+        }
 
+        @media (min-width: 900px) {
+            .btn span:not(.material-icons),
             .file-input-label span:not(.material-icons) {
                 display: inline;
+            }
+
+            .status {
+                order: 0;
+                flex-basis: auto;
+                max-width: 280px;
+                margin-left: 4px;
+                padding: 0;
             }
         }
 
         .viewer-container {
             position: relative;
-            padding: 15px;
-            background: #1e1e1e;
-            min-height: 400px;
-            max-height: calc(100vh - 300px);
+            flex: 1;
+            min-height: 0;
+            padding: 12px;
+            background: #121212;
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            overflow-y: auto;
-            overflow-x: hidden;
-            transition: all 0.3s;
-        }
-
-        .zoom-controls {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 100;
-            display: flex;
-            gap: 8px;
-            background: #2d2d2d;
-            padding: 8px;
-            border-radius: 8px;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-
-        .zoom-controls.hidden {
-            display: none;
-        }
-
-        .zoom-btn {
-            width: 36px;
-            height: 36px;
-            background: #424242;
-            color: #e0e0e0;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-        }
-
-        .zoom-btn:hover {
-            background: #616161;
-        }
-
-        .zoom-btn .material-icons {
-            font-size: 20px;
+            overflow: auto;
         }
 
         .viewer-container::before {
-            content: 'ファイルをドラッグ&ドロップ';
+            content: 'PDF / ハンコ画像をドロップ';
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            color: #616161;
-            font-size: 16px;
+            color: #555;
+            font-size: 15px;
             font-weight: 500;
             z-index: 1;
             pointer-events: none;
@@ -287,50 +222,74 @@
         }
 
         .viewer-container.drag-over {
-            background: #2d2d2d;
-            border: 2px dashed #616161;
+            background: #1a1a1a;
+            outline: 2px dashed #666;
+            outline-offset: -8px;
         }
 
         .viewer-container.drag-over::before {
-            content: 'ファイルをドロップしてください';
-            color: #b0b0b0;
-            font-size: 18px;
+            content: 'ドロップしてください';
+            color: #aaa;
             z-index: 1000;
         }
 
         .pdf-viewer {
             position: relative;
-            background: #2d2d2d;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            width: 100%;
             overflow: visible;
         }
 
-        @media (min-width: 768px) {
-            .viewer-container {
-                padding: 30px;
-                min-height: 600px;
-            }
+        .pdf-page {
+            position: relative;
+            background: #fff;
+            box-shadow: 0 1px 4px rgba(0, 0, 0, 0.45);
+            overflow: visible;
+            flex-shrink: 0;
+        }
 
-            .pdf-viewer {
-                border-radius: 12px;
-                box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
-            }
+        .pdf-page canvas {
+            display: block;
+        }
+
+        .page-label {
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            background: rgba(0, 0, 0, 0.55);
+            color: #eee;
+            font-size: 11px;
+            padding: 2px 6px;
+            border-radius: 3px;
+            pointer-events: none;
+            z-index: 5;
         }
 
         .stamp-container {
             position: absolute;
             cursor: move;
             border: 2px dashed transparent;
-            transition: all 0.2s;
+            transition: border-color 0.15s;
+            will-change: left, top, width, height;
+            touch-action: none;
+            z-index: 10;
+        }
+
+        .stamp-container.dragging,
+        .stamp-container.resizing {
+            transition: none;
+            z-index: 20;
         }
 
         .stamp-container:hover {
-            border-color: rgba(255, 255, 255, 0.3);
+            border-color: rgba(0, 0, 0, 0.25);
         }
 
         .stamp-container.selected {
-            border-color: #616161;
+            border-color: #1976d2;
             border-style: solid;
         }
 
@@ -346,17 +305,17 @@
             position: absolute;
             width: 12px;
             height: 12px;
-            background: #616161;
-            border: 2px solid #1e1e1e;
+            background: #1976d2;
+            border: 2px solid #fff;
             border-radius: 50%;
             cursor: nwse-resize;
             z-index: 10;
-            transition: all 0.2s;
+            transition: background 0.15s, transform 0.15s;
         }
 
         .resize-handle:hover {
-            background: #757575;
-            transform: scale(1.2);
+            background: #42a5f5;
+            transform: scale(1.15);
         }
 
         .resize-handle.nw { top: -6px; left: -6px; cursor: nw-resize; }
@@ -370,13 +329,13 @@
 
         .delete-btn {
             position: absolute;
-            top: -15px;
-            right: -15px;
-            width: 28px;
-            height: 28px;
-            background: #424242;
-            color: #e0e0e0;
-            border: 2px solid #1e1e1e;
+            top: -12px;
+            right: -12px;
+            width: 24px;
+            height: 24px;
+            background: #333;
+            color: #eee;
+            border: 2px solid #fff;
             border-radius: 50%;
             padding: 0;
             cursor: pointer;
@@ -385,11 +344,11 @@
             z-index: 100;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            transition: background 0.15s, transform 0.15s;
         }
 
         .delete-btn .material-icons {
-            font-size: 18px;
+            font-size: 16px;
         }
 
         .stamp-container.selected .delete-btn {
@@ -397,97 +356,57 @@
         }
 
         .delete-btn:hover {
-            background: #616161;
-            transform: scale(1.1);
-        }
-
-        .status {
-            padding: 15px 20px;
-            background: #252525;
-            border-top: 1px solid rgba(255, 255, 255, 0.1);
-            text-align: center;
-            color: #b0b0b0;
-            font-size: 13px;
-            font-weight: 400;
-        }
-
-        @media (min-width: 768px) {
-            .status {
-                padding: 18px 20px;
-                font-size: 14px;
-            }
+            background: #555;
+            transform: scale(1.08);
         }
 
         .hidden {
-            display: none;
+            display: none !important;
         }
 
-        /* スクロールバーのスタイル */
         ::-webkit-scrollbar {
             width: 8px;
             height: 8px;
         }
 
         ::-webkit-scrollbar-track {
-            background: #1e1e1e;
-            border-radius: 4px;
+            background: #121212;
         }
 
         ::-webkit-scrollbar-thumb {
-            background: #424242;
+            background: #3a3a3a;
             border-radius: 4px;
         }
 
         ::-webkit-scrollbar-thumb:hover {
-            background: #616161;
-        }
-
-        @media (min-width: 768px) {
-            ::-webkit-scrollbar {
-                width: 12px;
-                height: 12px;
-            }
+            background: #555;
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="header">
-            <div class="header-content">
-                <h1>
-                    <span class="material-icons">description</span>
-                    <span>PDF ハンコ貼り付けアプリ</span>
-                </h1>
-                <p>PDFをアップロードして、ハンコ画像を貼り付けましょう</p>
+    <div class="app">
+        <div class="toolbar">
+            <div class="toolbar-group">
+                <div class="file-input-wrapper">
+                    <input type="file" id="pdfInput" accept=".pdf,application/pdf" />
+                    <label for="pdfInput" class="file-input-label" title="PDFを選択">
+                        <span class="material-icons">attach_file</span>
+                        <span>PDF</span>
+                    </label>
+                </div>
+                <div class="file-input-wrapper">
+                    <input type="file" id="stampInput" accept="image/*,.svg,image/svg+xml" />
+                    <label for="stampInput" class="file-input-label" title="ハンコ画像を選択（PNG/JPG/SVG）">
+                        <span class="material-icons">brush</span>
+                        <span>ハンコ</span>
+                    </label>
+                </div>
+                <button class="btn" id="clearStampsBtn" title="ハンコを全て削除">
+                    <span class="material-icons">delete_sweep</span>
+                    <span>全削除</span>
+                </button>
             </div>
-        </div>
 
-        <div class="controls">
-            <div class="file-input-wrapper">
-                <input type="file" id="pdfInput" accept=".pdf" />
-                <label for="pdfInput" class="file-input-label">
-                    <span class="material-icons">attach_file</span>
-                    <span>PDFを選択</span>
-                </label>
-            </div>
-            <div class="file-input-wrapper">
-                <input type="file" id="stampInput" accept="image/*" />
-                <label for="stampInput" class="file-input-label">
-                    <span class="material-icons">image</span>
-                    <span>ハンコ画像を選択</span>
-                </label>
-            </div>
-            <button class="btn btn-primary" id="clearStampsBtn">
-                <span class="material-icons">delete_sweep</span>
-                <span>ハンコを全て削除</span>
-            </button>
-            <button class="btn btn-download" id="downloadBtn">
-                <span class="material-icons">download</span>
-                <span>PDFをダウンロード</span>
-            </button>
-        </div>
-
-        <div class="viewer-container" id="viewerContainer">
             <div class="zoom-controls hidden" id="zoomControls">
                 <button class="zoom-btn" id="zoomOutBtn" title="縮小">
                     <span class="material-icons">zoom_out</span>
@@ -499,11 +418,29 @@
                     <span class="material-icons">fit_screen</span>
                 </button>
             </div>
-            <div id="pdfViewer" class="pdf-viewer"></div>
+
+            <div class="page-nav" id="pageNav">
+                <button class="btn" id="prevPageBtn" title="前のページ">
+                    <span class="material-icons">chevron_left</span>
+                </button>
+                <span class="page-nav-info" id="pageNavInfo">1 / 1</span>
+                <button class="btn" id="nextPageBtn" title="次のページ">
+                    <span class="material-icons">chevron_right</span>
+                </button>
+            </div>
+
+            <span class="status" id="status">PDFを選択またはドロップ</span>
+
+            <div class="toolbar-spacer"></div>
+
+            <button class="btn btn-download" id="downloadBtn" title="PDFをダウンロード">
+                <span class="material-icons">download</span>
+                <span>ダウンロード</span>
+            </button>
         </div>
 
-        <div class="status" id="status">
-            PDFファイルを選択してください
+        <div class="viewer-container" id="viewerContainer">
+            <div id="pdfViewer" class="pdf-viewer"></div>
         </div>
     </div>
 
@@ -532,6 +469,13 @@
         let initialStampPos = { x: 0, y: 0 };
         let currentScale = 1.5;
         let manualScale = null; // 手動で設定したスケール（nullの場合は自動）
+        let pageElements = new Map(); // pageNum -> { el, width, height }
+        let activeDragEl = null;
+        let activePageEl = null;
+        let dragRafId = null;
+        let pendingDragPoint = null;
+        let resizeRafId = null;
+        let pendingResizePoint = null;
 
         const pdfInput = document.getElementById('pdfInput');
         const stampInput = document.getElementById('stampInput');
@@ -544,6 +488,10 @@
         const zoomInBtn = document.getElementById('zoomInBtn');
         const zoomOutBtn = document.getElementById('zoomOutBtn');
         const zoomFitBtn = document.getElementById('zoomFitBtn');
+        const pageNav = document.getElementById('pageNav');
+        const pageNavInfo = document.getElementById('pageNavInfo');
+        const prevPageBtn = document.getElementById('prevPageBtn');
+        const nextPageBtn = document.getElementById('nextPageBtn');
 
         // PDF読み込み関数
         async function loadPDF(file) {
@@ -568,7 +516,8 @@
                     viewerContainer.classList.add('has-pdf');
                     zoomControls.classList.remove('hidden');
                     manualScale = null; // デフォルトにリセット
-                    await renderPage();
+                    updatePageNav();
+                    await renderAllPages();
                     status.textContent = `PDFを読み込みました (${pdfDoc.numPages}ページ)`;
                 } catch (error) {
                     status.textContent = 'PDFの読み込みに失敗しました: ' + error.message;
@@ -594,63 +543,265 @@
             return pixelCoord / scale;
         }
 
-        // ページレンダリング
-        async function renderPage() {
+        function updatePageNav() {
+            if (!pdfDoc) {
+                pageNav.classList.remove('visible');
+                return;
+            }
+            pageNav.classList.toggle('visible', pdfDoc.numPages > 1);
+            pageNavInfo.textContent = `${currentPage} / ${pdfDoc.numPages}`;
+            prevPageBtn.disabled = currentPage <= 1;
+            nextPageBtn.disabled = currentPage >= pdfDoc.numPages;
+        }
+
+        function getPageElement(pageNum) {
+            return pageElements.get(pageNum)?.el || null;
+        }
+
+        function scrollToPage(pageNum, smooth = true) {
+            const pageEl = getPageElement(pageNum);
+            if (!pageEl) return;
+            pageEl.scrollIntoView({ behavior: smooth ? 'smooth' : 'auto', block: 'start' });
+        }
+
+        function updateCurrentPageFromScroll() {
+            if (!pdfDoc || pageElements.size === 0) return;
+            const containerRect = viewerContainer.getBoundingClientRect();
+            const focusY = containerRect.top + Math.min(120, containerRect.height * 0.25);
+            let bestPage = currentPage;
+            let bestDist = Infinity;
+
+            pageElements.forEach((info, pageNum) => {
+                const rect = info.el.getBoundingClientRect();
+                const dist = Math.abs(rect.top - focusY);
+                if (rect.bottom > containerRect.top && rect.top < containerRect.bottom && dist < bestDist) {
+                    bestDist = dist;
+                    bestPage = pageNum;
+                }
+            });
+
+            if (bestPage !== currentPage) {
+                currentPage = bestPage;
+                updatePageNav();
+            }
+        }
+
+        // 全ページレンダリング
+        async function renderAllPages() {
             if (!pdfDoc) return;
 
-            const page = await pdfDoc.getPage(currentPage);
-            
-            // PDFページの元のサイズを取得
-            const baseViewport = page.getViewport({ scale: 1.0 });
+            status.textContent = `PDFを描画中... (0 / ${pdfDoc.numPages})`;
+
+            const firstPage = await pdfDoc.getPage(1);
+            const baseViewport = firstPage.getViewport({ scale: 1.0 });
             const pageWidth = baseViewport.width;
-            const pageHeight = baseViewport.height;
-            
+
             let scale;
             if (manualScale !== null) {
-                // 手動で設定したスケールを使用
                 scale = manualScale;
             } else {
-                // デフォルト: 横幅に合わせる
                 const containerRect = viewerContainer.getBoundingClientRect();
-                const containerWidth = containerRect.width - 30; // パディングを考慮
+                const containerWidth = containerRect.width - 24;
                 scale = containerWidth / pageWidth;
             }
-            
+
             // スケールの範囲を制限（0.5倍～3倍）
             scale = Math.max(0.5, Math.min(scale, 3.0));
-            
-            const viewport = page.getViewport({ scale: scale });
-            
-            // スケールを保存（PDFダウンロード時に使用）
             currentScale = scale;
-            
+
             pdfViewer.innerHTML = '';
-            pdfViewer.style.width = viewport.width + 'px';
-            pdfViewer.style.height = viewport.height + 'px';
+            pdfViewer.style.width = '';
+            pdfViewer.style.height = '';
+            pageElements = new Map();
 
-            const canvas = document.createElement('canvas');
-            const context = canvas.getContext('2d');
-            canvas.height = viewport.height;
-            canvas.width = viewport.width;
+            for (let pageNum = 1; pageNum <= pdfDoc.numPages; pageNum++) {
+                const page = pageNum === 1 ? firstPage : await pdfDoc.getPage(pageNum);
+                const viewport = page.getViewport({ scale: scale });
 
-            const renderContext = {
-                canvasContext: context,
-                viewport: viewport
-            };
+                const pageEl = document.createElement('div');
+                pageEl.className = 'pdf-page';
+                pageEl.dataset.page = String(pageNum);
+                pageEl.style.width = viewport.width + 'px';
+                pageEl.style.height = viewport.height + 'px';
 
-            await page.render(renderContext).promise;
-            pdfViewer.appendChild(canvas);
+                const label = document.createElement('div');
+                label.className = 'page-label';
+                label.textContent = `${pageNum} / ${pdfDoc.numPages}`;
+                pageEl.appendChild(label);
+
+                const canvas = document.createElement('canvas');
+                const context = canvas.getContext('2d');
+                canvas.height = viewport.height;
+                canvas.width = viewport.width;
+
+                await page.render({
+                    canvasContext: context,
+                    viewport: viewport
+                }).promise;
+
+                pageEl.appendChild(canvas);
+                pdfViewer.appendChild(pageEl);
+                pageElements.set(pageNum, {
+                    el: pageEl,
+                    width: viewport.width,
+                    height: viewport.height
+                });
+
+                if (pageNum === 1 || pageNum % 3 === 0 || pageNum === pdfDoc.numPages) {
+                    status.textContent = `PDFを描画中... (${pageNum} / ${pdfDoc.numPages})`;
+                }
+            }
 
             // 既存のハンコを再配置
-            stamps.forEach(stamp => {
-                if (stamp.page === currentPage) {
-                    addStampToViewer(stamp, scale);
+            stamps.forEach(stamp => addStampToViewer(stamp, scale));
+            updatePageNav();
+
+            // 現在ページへスクロール（再レンダリング時は即時）
+            requestAnimationFrame(() => scrollToPage(currentPage, false));
+            status.textContent = `PDFを表示中 (${pdfDoc.numPages}ページ) / ハンコ ${stamps.length}個`;
+        }
+
+        // 互換用エイリアス
+        async function renderPage() {
+            await renderAllPages();
+        }
+
+        function isSvgFile(file) {
+            if (!file) return false;
+            return file.type === 'image/svg+xml' || /\.svg$/i.test(file.name || '');
+        }
+
+        function isSvgDataUrl(dataUrl) {
+            return typeof dataUrl === 'string' && /image\/svg\+xml/i.test(dataUrl);
+        }
+
+        function isImageFile(file) {
+            if (!file) return false;
+            return file.type.startsWith('image/') || isSvgFile(file);
+        }
+
+        // SVGはテキスト読み込みの方が互換性が高い
+        function readFileAsImageData(file) {
+            return new Promise((resolve, reject) => {
+                if (isSvgFile(file)) {
+                    const reader = new FileReader();
+                    reader.onload = () => {
+                        const text = String(reader.result || '');
+                        const encoded = encodeURIComponent(text)
+                            .replace(/'/g, '%27')
+                            .replace(/"/g, '%22');
+                        resolve({
+                            dataUrl: `data:image/svg+xml;charset=utf-8,${encoded}`,
+                            isSvg: true,
+                            svgText: text
+                        });
+                    };
+                    reader.onerror = () => reject(reader.error);
+                    reader.readAsText(file);
+                    return;
                 }
+
+                const reader = new FileReader();
+                reader.onload = () => {
+                    resolve({
+                        dataUrl: reader.result,
+                        isSvg: false,
+                        svgText: null
+                    });
+                };
+                reader.onerror = () => reject(reader.error);
+                reader.readAsDataURL(file);
             });
         }
 
+        function loadImageFromDataUrl(dataUrl) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                img.onload = () => resolve(img);
+                img.onerror = () => reject(new Error('画像の読み込みに失敗しました'));
+                img.src = dataUrl;
+            });
+        }
+
+        function parseSvgSize(svgText) {
+            if (!svgText) return { width: 0, height: 0 };
+            const viewBox = svgText.match(/viewBox\s*=\s*["']?\s*([-\d.]+)[,\s]+([-\d.]+)[,\s]+([-\d.]+)[,\s]+([-\d.]+)/i);
+            if (viewBox) {
+                return {
+                    width: Math.abs(parseFloat(viewBox[3])) || 0,
+                    height: Math.abs(parseFloat(viewBox[4])) || 0
+                };
+            }
+            const w = svgText.match(/\bwidth\s*=\s*["']?([\d.]+)/i);
+            const h = svgText.match(/\bheight\s*=\s*["']?([\d.]+)/i);
+            return {
+                width: w ? parseFloat(w[1]) : 0,
+                height: h ? parseFloat(h[1]) : 0
+            };
+        }
+
+        // pdf-libはSVG非対応のためPNGへラスタライズ
+        async function rasterizeStampToPngBytes(stamp) {
+            const img = stamp.image || await loadImageFromDataUrl(stamp.imageData);
+            let srcW = img.naturalWidth || img.width || 0;
+            let srcH = img.naturalHeight || img.height || 0;
+
+            if ((!srcW || !srcH) && stamp.svgText) {
+                const size = parseSvgSize(stamp.svgText);
+                srcW = size.width;
+                srcH = size.height;
+            }
+            if (!srcW || !srcH) {
+                srcW = 512;
+                srcH = 512;
+            }
+
+            const targetW = Math.max(256, Math.round(Math.max(srcW, stamp.pdfWidth * 4)));
+            const targetH = Math.max(256, Math.round(targetW * (srcH / srcW)));
+
+            const canvas = document.createElement('canvas');
+            canvas.width = targetW;
+            canvas.height = targetH;
+            const ctx = canvas.getContext('2d');
+            ctx.clearRect(0, 0, targetW, targetH);
+            ctx.drawImage(img, 0, 0, targetW, targetH);
+
+            const pngDataUrl = canvas.toDataURL('image/png');
+            return dataURLToUint8Array(pngDataUrl);
+        }
+
+        async function embedStampImage(pdfDocLib, stamp) {
+            if (stamp.isSvg || isSvgDataUrl(stamp.imageData)) {
+                const pngBytes = await rasterizeStampToPngBytes(stamp);
+                return pdfDocLib.embedPng(pngBytes);
+            }
+
+            const imageBytes = dataURLToUint8Array(stamp.imageData);
+            const mimeType = stamp.imageData.match(/data:image\/([^;,]+)/);
+            if (mimeType) {
+                const format = mimeType[1].toLowerCase();
+                if (format === 'png') {
+                    return pdfDocLib.embedPng(imageBytes);
+                }
+                if (format === 'jpeg' || format === 'jpg') {
+                    return pdfDocLib.embedJpg(imageBytes);
+                }
+                if (format.includes('svg')) {
+                    const pngBytes = await rasterizeStampToPngBytes(stamp);
+                    return pdfDocLib.embedPng(pngBytes);
+                }
+            }
+            // 不明形式はPNGとして試行、失敗時はラスタライズ
+            try {
+                return await pdfDocLib.embedPng(imageBytes);
+            } catch (_) {
+                const pngBytes = await rasterizeStampToPngBytes(stamp);
+                return pdfDocLib.embedPng(pngBytes);
+            }
+        }
+
         // ハンコ画像読み込み関数
-        function loadStamp(file) {
+        async function loadStamp(file) {
             if (!file) return false;
 
             if (!pdfDoc) {
@@ -658,66 +809,81 @@
                 return false;
             }
 
-            const reader = new FileReader();
-            reader.onload = async (event) => {
-                const img = new Image();
-                img.onload = async () => {
-                    // PDFページの元のサイズを取得
-                    const page = await pdfDoc.getPage(currentPage);
-                    const baseViewport = page.getViewport({ scale: 1.0 });
-                    
-                    // 初期位置をPDF座標系で設定（デフォルト位置）
-                    const initialPdfX = 100 / currentScale;
-                    const initialPdfY = 100 / currentScale;
-                    const initialPdfWidth = 150 / currentScale;
-                    const initialPdfHeight = 150 / currentScale;
-                    
-                    const stamp = {
-                        id: Date.now(),
-                        image: img,
-                        imageData: event.target.result,
-                        // PDF座標系での位置とサイズ（scale=1.0での値）
-                        pdfX: initialPdfX,
-                        pdfY: initialPdfY,
-                        pdfWidth: initialPdfWidth,
-                        pdfHeight: initialPdfHeight,
-                        // 表示用のピクセル座標（計算で更新される）
-                        x: 0,
-                        y: 0,
-                        width: 0,
-                        height: 0,
-                        page: currentPage
-                    };
-                    stamps.push(stamp);
-                    addStampToViewer(stamp, currentScale);
-                    status.textContent = 'ハンコを追加しました。ドラッグして移動、角をドラッグしてサイズ変更';
+            if (!isImageFile(file)) {
+                status.textContent = '画像ファイル（PNG/JPG/SVG）を選択してください';
+                return false;
+            }
+
+            try {
+                const { dataUrl, isSvg, svgText } = await readFileAsImageData(file);
+                const img = await loadImageFromDataUrl(dataUrl);
+
+                updateCurrentPageFromScroll();
+
+                let aspect = 1;
+                const natW = img.naturalWidth || img.width;
+                const natH = img.naturalHeight || img.height;
+                if (natW > 0 && natH > 0) {
+                    aspect = natW / natH;
+                } else if (svgText) {
+                    const size = parseSvgSize(svgText);
+                    if (size.width > 0 && size.height > 0) {
+                        aspect = size.width / size.height;
+                    }
+                }
+
+                const initialPdfWidth = 150 / currentScale;
+                const initialPdfHeight = initialPdfWidth / aspect;
+                const initialPdfX = 100 / currentScale;
+                const initialPdfY = 100 / currentScale;
+
+                const stamp = {
+                    id: Date.now() + Math.random(),
+                    image: img,
+                    imageData: dataUrl,
+                    isSvg,
+                    svgText,
+                    pdfX: initialPdfX,
+                    pdfY: initialPdfY,
+                    pdfWidth: initialPdfWidth,
+                    pdfHeight: initialPdfHeight,
+                    x: 0,
+                    y: 0,
+                    width: 0,
+                    height: 0,
+                    page: currentPage
                 };
-                img.src = event.target.result;
-            };
-            reader.readAsDataURL(file);
-            return true;
+                stamps.push(stamp);
+                addStampToViewer(stamp, currentScale);
+                status.textContent = `${currentPage}ページ目にハンコを追加${isSvg ? '（SVG）' : ''}`;
+                return true;
+            } catch (error) {
+                console.error(error);
+                status.textContent = 'ハンコ画像の読み込みに失敗しました';
+                return false;
+            }
         }
 
         // ハンコ画像読み込み
-        stampInput.addEventListener('change', (e) => {
+        stampInput.addEventListener('change', async (e) => {
             const file = e.target.files[0];
-            loadStamp(file);
+            await loadStamp(file);
+            // 同じファイルを再選択できるようにする
+            e.target.value = '';
         });
 
         // 削除ボタンの位置を調整
-        function updateDeleteButtonPosition(container, stamp) {
+        function updateDeleteButtonPosition(container) {
             const deleteBtn = container.querySelector('.delete-btn');
             if (!deleteBtn) return;
-            
-            // ハンコの右上に配置（常に枠外）
-            // ボタンサイズ28px + 余白を考慮して-15pxに固定
             deleteBtn.style.top = '-15px';
             deleteBtn.style.right = '-15px';
         }
 
         // ハンコをビューアに追加
         function addStampToViewer(stamp, scale) {
-            if (stamp.page !== currentPage) return;
+            const pageInfo = pageElements.get(stamp.page);
+            if (!pageInfo) return;
 
             // PDF座標系からピクセル座標に変換
             stamp.x = pdfToPixel(stamp.pdfX, scale);
@@ -736,6 +902,7 @@
             const img = document.createElement('img');
             img.src = stamp.imageData;
             img.className = 'stamp-image';
+            img.draggable = false;
             container.appendChild(img);
 
             // 削除ボタン
@@ -750,9 +917,7 @@
                 removeStamp(stamp.id);
             };
             container.appendChild(deleteBtn);
-            
-            // 削除ボタンの位置を調整
-            updateDeleteButtonPosition(container, stamp);
+            updateDeleteButtonPosition(container);
 
             // リサイズハンドル
             const handles = ['nw', 'ne', 'sw', 'se', 'n', 's', 'w', 'e'];
@@ -767,29 +932,30 @@
             container.addEventListener('click', (e) => {
                 if (e.target.classList.contains('resize-handle') || e.target.classList.contains('delete-btn')) return;
                 selectStamp(stamp.id);
+                currentPage = stamp.page;
+                updatePageNav();
             });
 
             // ドラッグ開始
-            container.addEventListener('mousedown', (e) => {
+            container.addEventListener('pointerdown', (e) => {
+                if (e.button !== undefined && e.button !== 0) return;
                 if (e.target.classList.contains('resize-handle')) {
-                    startResize(e, container, stamp);
-                } else if (!e.target.classList.contains('delete-btn')) {
-                    startDrag(e, container, stamp);
+                    startResize(e, container, stamp, pageInfo.el);
+                } else if (!e.target.closest('.delete-btn')) {
+                    startDrag(e, container, stamp, pageInfo.el);
                 }
             });
 
-            pdfViewer.appendChild(container);
+            pageInfo.el.appendChild(container);
             selectStamp(stamp.id);
         }
 
         // ハンコ選択
         function selectStamp(stampId) {
-            // 全ての選択を解除
             document.querySelectorAll('.stamp-container').forEach(el => {
                 el.classList.remove('selected');
             });
 
-            // 選択
             const container = document.querySelector(`[data-stamp-id="${stampId}"]`);
             if (container) {
                 container.classList.add('selected');
@@ -798,203 +964,252 @@
         }
 
         // ドラッグ開始
-        function startDrag(e, container, stamp) {
+        function startDrag(e, container, stamp, pageEl) {
             isDragging = true;
             selectedStamp = stamp;
+            activeDragEl = container;
+            activePageEl = pageEl;
             selectStamp(stamp.id);
-            
+            currentPage = stamp.page;
+            updatePageNav();
+
+            container.classList.add('dragging');
+
             const rect = container.getBoundingClientRect();
-            const viewerRect = pdfViewer.getBoundingClientRect();
             dragOffset.x = e.clientX - rect.left;
             dragOffset.y = e.clientY - rect.top;
 
-            document.addEventListener('mousemove', handleDrag);
-            document.addEventListener('mouseup', stopDrag);
+            // pointer capture で要素外でも追従。イベントは capture 先に届くので要素側で購読
+            container.addEventListener('pointermove', handleDrag, { passive: false });
+            container.addEventListener('pointerup', stopDrag);
+            container.addEventListener('pointercancel', stopDrag);
+            try {
+                container.setPointerCapture(e.pointerId);
+            } catch (_) { /* ignore */ }
             e.preventDefault();
         }
 
-        // ドラッグ処理
-        function handleDrag(e) {
-            if (!isDragging || !selectedStamp) return;
+        function applyDragPosition(clientX, clientY) {
+            if (!isDragging || !selectedStamp || !activeDragEl || !activePageEl) return;
 
-            const viewerRect = pdfViewer.getBoundingClientRect();
-            let x = e.clientX - viewerRect.left - dragOffset.x;
-            let y = e.clientY - viewerRect.top - dragOffset.y;
+            const pageRect = activePageEl.getBoundingClientRect();
+            let x = clientX - pageRect.left - dragOffset.x;
+            let y = clientY - pageRect.top - dragOffset.y;
 
-            // 境界チェック
-            x = Math.max(0, Math.min(x, pdfViewer.offsetWidth - selectedStamp.width));
-            y = Math.max(0, Math.min(y, pdfViewer.offsetHeight - selectedStamp.height));
+            const pageW = activePageEl.offsetWidth;
+            const pageH = activePageEl.offsetHeight;
 
-            // ピクセル座標を更新
+            x = Math.max(0, Math.min(x, pageW - selectedStamp.width));
+            y = Math.max(0, Math.min(y, pageH - selectedStamp.height));
+
             selectedStamp.x = x;
             selectedStamp.y = y;
-            
-            // PDF座標系に変換して保存
-            selectedStamp.pdfX = pixelToPdf(x, currentScale);
-            selectedStamp.pdfY = pixelToPdf(y, currentScale);
+            activeDragEl.style.left = x + 'px';
+            activeDragEl.style.top = y + 'px';
+        }
 
-            const container = document.querySelector(`[data-stamp-id="${selectedStamp.id}"]`);
-            if (container) {
-                container.style.left = x + 'px';
-                container.style.top = y + 'px';
-            }
+        // ドラッグ処理（rAFで描画を間引きつつ最新位置を反映）
+        function handleDrag(e) {
+            if (!isDragging || !selectedStamp) return;
+            e.preventDefault();
+            pendingDragPoint = { x: e.clientX, y: e.clientY };
+            if (dragRafId !== null) return;
+            dragRafId = requestAnimationFrame(() => {
+                dragRafId = null;
+                if (!pendingDragPoint) return;
+                applyDragPosition(pendingDragPoint.x, pendingDragPoint.y);
+            });
         }
 
         // ドラッグ終了
         function stopDrag() {
+            if (dragRafId !== null) {
+                cancelAnimationFrame(dragRafId);
+                dragRafId = null;
+            }
+            if (pendingDragPoint) {
+                applyDragPosition(pendingDragPoint.x, pendingDragPoint.y);
+                pendingDragPoint = null;
+            }
+
+            if (selectedStamp) {
+                selectedStamp.pdfX = pixelToPdf(selectedStamp.x, currentScale);
+                selectedStamp.pdfY = pixelToPdf(selectedStamp.y, currentScale);
+            }
+
+            if (activeDragEl) {
+                activeDragEl.classList.remove('dragging');
+                activeDragEl.removeEventListener('pointermove', handleDrag);
+                activeDragEl.removeEventListener('pointerup', stopDrag);
+                activeDragEl.removeEventListener('pointercancel', stopDrag);
+            }
+
             isDragging = false;
-            document.removeEventListener('mousemove', handleDrag);
-            document.removeEventListener('mouseup', stopDrag);
+            activeDragEl = null;
+            activePageEl = null;
         }
 
         // リサイズ開始
-        function startResize(e, container, stamp) {
+        function startResize(e, container, stamp, pageEl) {
             isResizing = true;
             selectedStamp = stamp;
+            activeDragEl = container;
+            activePageEl = pageEl;
             resizeHandle = e.target.dataset.handle;
-            
+            currentPage = stamp.page;
+            updatePageNav();
+            selectStamp(stamp.id);
+
+            container.classList.add('resizing');
+
             const rect = container.getBoundingClientRect();
-            const viewerRect = pdfViewer.getBoundingClientRect();
             initialPos.x = e.clientX;
             initialPos.y = e.clientY;
             initialSize.width = rect.width;
             initialSize.height = rect.height;
-            // リサイズ開始時のハンコの位置を保存
             initialStampPos.x = stamp.x;
             initialStampPos.y = stamp.y;
 
-            document.addEventListener('mousemove', handleResize);
-            document.addEventListener('mouseup', stopResize);
+            container.addEventListener('pointermove', handleResize, { passive: false });
+            container.addEventListener('pointerup', stopResize);
+            container.addEventListener('pointercancel', stopResize);
+            try {
+                container.setPointerCapture(e.pointerId);
+            } catch (_) { /* ignore */ }
             e.preventDefault();
             e.stopPropagation();
         }
 
-        // リサイズ処理
-        function handleResize(e) {
-            if (!isResizing || !selectedStamp) return;
+        function applyResize(clientX, clientY) {
+            if (!isResizing || !selectedStamp || !activeDragEl || !activePageEl) return;
 
-            const deltaX = e.clientX - initialPos.x;
-            const deltaY = e.clientY - initialPos.y;
+            const deltaX = clientX - initialPos.x;
+            const deltaY = clientY - initialPos.y;
             
             let newWidth = initialSize.width;
             let newHeight = initialSize.height;
-            // 初期位置を使用（リサイズ開始時の位置）
             let newX = initialStampPos.x;
             let newY = initialStampPos.y;
 
             const minSize = 30;
             const aspectRatio = initialSize.width / initialSize.height;
-            
-            // 初期位置をPDF座標系から取得
-            const initialPdfX = pixelToPdf(initialStampPos.x, currentScale);
-            const initialPdfY = pixelToPdf(initialStampPos.y, currentScale);
+            const pageW = activePageEl.offsetWidth;
+            const pageH = activePageEl.offsetHeight;
 
             switch (resizeHandle) {
                 case 'se':
-                    // 右下: 幅と高さを増やす、位置は変わらない
                     newWidth = Math.max(minSize, initialSize.width + deltaX);
                     newHeight = newWidth / aspectRatio;
                     break;
                 case 'sw':
-                    // 左下: 左側からリサイズ、X位置を調整
                     newWidth = Math.max(minSize, initialSize.width - deltaX);
                     newHeight = newWidth / aspectRatio;
                     newX = initialStampPos.x + (initialSize.width - newWidth);
                     break;
                 case 'ne':
-                    // 右上: 上側からリサイズ、Y位置を調整
                     newWidth = Math.max(minSize, initialSize.width + deltaX);
                     newHeight = newWidth / aspectRatio;
                     newY = initialStampPos.y + (initialSize.height - newHeight);
                     break;
                 case 'nw':
-                    // 左上: 左上からリサイズ、XとY位置を調整
                     newWidth = Math.max(minSize, initialSize.width - deltaX);
                     newHeight = newWidth / aspectRatio;
                     newX = initialStampPos.x + (initialSize.width - newWidth);
                     newY = initialStampPos.y + (initialSize.height - newHeight);
                     break;
                 case 'e':
-                    // 右側: 右側からリサイズ
                     newWidth = Math.max(minSize, initialSize.width + deltaX);
                     newHeight = newWidth / aspectRatio;
                     break;
                 case 'w':
-                    // 左側: 左側からリサイズ、X位置を調整
                     newWidth = Math.max(minSize, initialSize.width - deltaX);
                     newHeight = newWidth / aspectRatio;
                     newX = initialStampPos.x + (initialSize.width - newWidth);
                     break;
                 case 's':
-                    // 下側: 下側からリサイズ
                     newHeight = Math.max(minSize, initialSize.height + deltaY);
                     newWidth = newHeight * aspectRatio;
                     break;
                 case 'n':
-                    // 上側: 上側からリサイズ、Y位置を調整
                     newHeight = Math.max(minSize, initialSize.height - deltaY);
                     newWidth = newHeight * aspectRatio;
                     newY = initialStampPos.y + (initialSize.height - newHeight);
                     break;
             }
 
-            // 境界チェック
             if (newX < 0) {
-                const adjustX = -newX;
-                newWidth -= adjustX;
+                newWidth += newX;
                 newX = 0;
-                // アスペクト比を維持するために高さも調整
-                if (resizeHandle.includes('w') || resizeHandle.includes('nw') || resizeHandle.includes('sw')) {
-                    newHeight = newWidth / aspectRatio;
-                }
-            }
-            if (newY < 0) {
-                const adjustY = -newY;
-                newHeight -= adjustY;
-                newY = 0;
-                // アスペクト比を維持するために幅も調整
-                if (resizeHandle.includes('n') || resizeHandle.includes('nw') || resizeHandle.includes('ne')) {
-                    newWidth = newHeight * aspectRatio;
-                }
-            }
-            if (newX + newWidth > pdfViewer.offsetWidth) {
-                newWidth = pdfViewer.offsetWidth - newX;
                 newHeight = newWidth / aspectRatio;
             }
-            if (newY + newHeight > pdfViewer.offsetHeight) {
-                newHeight = pdfViewer.offsetHeight - newY;
+            if (newY < 0) {
+                newHeight += newY;
+                newY = 0;
                 newWidth = newHeight * aspectRatio;
             }
+            if (newX + newWidth > pageW) {
+                newWidth = pageW - newX;
+                newHeight = newWidth / aspectRatio;
+            }
+            if (newY + newHeight > pageH) {
+                newHeight = pageH - newY;
+                newWidth = newHeight * aspectRatio;
+            }
+            if (newWidth < minSize || newHeight < minSize) return;
 
-            // ピクセル座標を更新
             selectedStamp.width = newWidth;
             selectedStamp.height = newHeight;
             selectedStamp.x = newX;
             selectedStamp.y = newY;
-            
-            // PDF座標系に変換して保存
-            selectedStamp.pdfX = pixelToPdf(newX, currentScale);
-            selectedStamp.pdfY = pixelToPdf(newY, currentScale);
-            selectedStamp.pdfWidth = pixelToPdf(newWidth, currentScale);
-            selectedStamp.pdfHeight = pixelToPdf(newHeight, currentScale);
 
-            const container = document.querySelector(`[data-stamp-id="${selectedStamp.id}"]`);
-            if (container) {
-                container.style.width = newWidth + 'px';
-                container.style.height = newHeight + 'px';
-                container.style.left = newX + 'px';
-                container.style.top = newY + 'px';
-                // 削除ボタンの位置を再調整
-                updateDeleteButtonPosition(container, selectedStamp);
-            }
+            activeDragEl.style.width = newWidth + 'px';
+            activeDragEl.style.height = newHeight + 'px';
+            activeDragEl.style.left = newX + 'px';
+            activeDragEl.style.top = newY + 'px';
+        }
+
+        // リサイズ処理
+        function handleResize(e) {
+            if (!isResizing || !selectedStamp) return;
+            e.preventDefault();
+            pendingResizePoint = { x: e.clientX, y: e.clientY };
+            if (resizeRafId !== null) return;
+            resizeRafId = requestAnimationFrame(() => {
+                resizeRafId = null;
+                if (!pendingResizePoint) return;
+                applyResize(pendingResizePoint.x, pendingResizePoint.y);
+            });
         }
 
         // リサイズ終了
         function stopResize() {
+            if (resizeRafId !== null) {
+                cancelAnimationFrame(resizeRafId);
+                resizeRafId = null;
+            }
+            if (pendingResizePoint) {
+                applyResize(pendingResizePoint.x, pendingResizePoint.y);
+                pendingResizePoint = null;
+            }
+
+            if (selectedStamp) {
+                selectedStamp.pdfX = pixelToPdf(selectedStamp.x, currentScale);
+                selectedStamp.pdfY = pixelToPdf(selectedStamp.y, currentScale);
+                selectedStamp.pdfWidth = pixelToPdf(selectedStamp.width, currentScale);
+                selectedStamp.pdfHeight = pixelToPdf(selectedStamp.height, currentScale);
+            }
+
+            if (activeDragEl) {
+                activeDragEl.classList.remove('resizing');
+                activeDragEl.removeEventListener('pointermove', handleResize);
+                activeDragEl.removeEventListener('pointerup', stopResize);
+                activeDragEl.removeEventListener('pointercancel', stopResize);
+            }
+
             isResizing = false;
             resizeHandle = null;
-            document.removeEventListener('mousemove', handleResize);
-            document.removeEventListener('mouseup', stopResize);
+            activeDragEl = null;
+            activePageEl = null;
         }
 
         // ハンコ削除
@@ -1058,26 +1273,7 @@
 
                     for (const stamp of pageStamps) {
                         try {
-                            // Data URLから画像データを取得
-                            const imageBytes = dataURLToUint8Array(stamp.imageData);
-                            let image;
-                            
-                            // 画像形式を判定
-                            const mimeType = stamp.imageData.match(/data:image\/([^;]+)/);
-                            if (mimeType) {
-                                const format = mimeType[1].toLowerCase();
-                                if (format === 'png') {
-                                    image = await pdfDocLib.embedPng(imageBytes);
-                                } else if (format === 'jpeg' || format === 'jpg') {
-                                    image = await pdfDocLib.embedJpg(imageBytes);
-                                } else {
-                                    // PNGとして試行
-                                    image = await pdfDocLib.embedPng(imageBytes);
-                                }
-                            } else {
-                                // デフォルトでPNGとして試行
-                                image = await pdfDocLib.embedPng(imageBytes);
-                            }
+                            const image = await embedStampImage(pdfDocLib, stamp);
 
                             // PDF座標系を直接使用（PDFは左下が原点）
                             const x = stamp.pdfX;
@@ -1093,7 +1289,7 @@
                             });
                         } catch (stampError) {
                             console.error(`ハンコ ${stamp.id} の処理エラー:`, stampError);
-                            status.textContent = `ハンコ ${stamp.id} の処理でエラーが発生しました`;
+                            status.textContent = `ハンコの埋め込みでエラーが発生しました`;
                         }
                     }
                 }
@@ -1118,12 +1314,40 @@
 
         // ビューア外クリックで選択解除
         viewerContainer.addEventListener('click', (e) => {
-            if (e.target === viewerContainer || e.target === pdfViewer || e.target.tagName === 'CANVAS') {
+            if (
+                e.target === viewerContainer ||
+                e.target === pdfViewer ||
+                e.target.tagName === 'CANVAS' ||
+                e.target.classList.contains('pdf-page') ||
+                e.target.classList.contains('page-label')
+            ) {
                 document.querySelectorAll('.stamp-container').forEach(el => {
                     el.classList.remove('selected');
                 });
                 selectedStamp = null;
             }
+        });
+
+        // スクロールで現在ページを更新
+        viewerContainer.addEventListener('scroll', () => {
+            if (!isDragging && !isResizing) {
+                updateCurrentPageFromScroll();
+            }
+        }, { passive: true });
+
+        // ページ送り
+        prevPageBtn.addEventListener('click', () => {
+            if (!pdfDoc || currentPage <= 1) return;
+            currentPage -= 1;
+            updatePageNav();
+            scrollToPage(currentPage);
+        });
+
+        nextPageBtn.addEventListener('click', () => {
+            if (!pdfDoc || currentPage >= pdfDoc.numPages) return;
+            currentPage += 1;
+            updatePageNav();
+            scrollToPage(currentPage);
         });
 
         // ドラッグ&ドロップ機能
@@ -1150,17 +1374,13 @@
             const files = Array.from(e.dataTransfer.files);
             
             for (const file of files) {
-                if (file.type === 'application/pdf') {
-                    // PDFファイル
+                if (file.type === 'application/pdf' || /\.pdf$/i.test(file.name)) {
                     await loadPDF(file);
-                    // PDF入力フィールドも更新
                     const dataTransfer = new DataTransfer();
                     dataTransfer.items.add(file);
                     pdfInput.files = dataTransfer.files;
-                } else if (file.type.startsWith('image/')) {
-                    // 画像ファイル
-                    loadStamp(file);
-                    // ハンコ入力フィールドも更新
+                } else if (isImageFile(file)) {
+                    await loadStamp(file);
                     const dataTransfer = new DataTransfer();
                     dataTransfer.items.add(file);
                     stampInput.files = dataTransfer.files;
@@ -1183,7 +1403,7 @@
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(() => {
                 if (pdfDoc && manualScale === null) {
-                    renderPage();
+                    renderAllPages();
                 }
             }, 250);
         });
@@ -1192,21 +1412,21 @@
         zoomInBtn.addEventListener('click', () => {
             if (!pdfDoc) return;
             manualScale = currentScale * 1.2;
-            renderPage();
+            renderAllPages();
         });
 
         // 縮小ボタン
         zoomOutBtn.addEventListener('click', () => {
             if (!pdfDoc) return;
             manualScale = currentScale * 0.8;
-            renderPage();
+            renderAllPages();
         });
 
         // 横幅に合わせるボタン
         zoomFitBtn.addEventListener('click', () => {
             if (!pdfDoc) return;
             manualScale = null; // 自動スケールに戻す
-            renderPage();
+            renderAllPages();
         });
     </script>
 </body>
